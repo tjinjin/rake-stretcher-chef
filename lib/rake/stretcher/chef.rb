@@ -1,9 +1,1 @@
-require "rake/stretcher/chef/version"
-
-module Rake
-  module Stretcher
-    module Chef
-      # Your code goes here...
-    end
-  end
-end
+load File.expand_path("../../../rake/stretcher/chef/tasks/chef.rake", __FILE__)
