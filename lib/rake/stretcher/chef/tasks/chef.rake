@@ -7,7 +7,7 @@ namespace :stretcher do
   desc "Create tarball"
   task :archive_project =>
   [:ensure_directories, :checkout_local,
-   :bundle,
+   :bundle, :submodule, :berks,
    :create_tarball, :upload_tarball,
    :create_and_upload_manifest
   ]
@@ -22,5 +22,20 @@ namespace :stretcher do
         --without development test RAILS_ENV="#{environment}"
       EOC
     end
+  end
+
+  desc "submodule update"
+  task :submodule do
+    sh <<-EOC
+      git submodule update
+    EOC
+  end
+
+  desc "community cookbook install"
+  task :berks do
+    sh <<-EOC
+      cd #{local_build_path}
+      bundle exec berks vendor cookbooks
+    EOC
   end
 end
